@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:monday/models/weather_model.dart';
 import 'package:monday/services/weather_service.dart';
 
@@ -18,13 +19,35 @@ class _WeatherPageState extends State<WeatherPage> {
     String cityName = await _weatherService.getCurrentCity();
 
     try {
-      print("${cityName} is here");
       final weatherModel = await _weatherService.getWeatherModel(cityName);
       setState(() {
         _weatherModel = weatherModel;
       });
     } catch (e) {
       print(e);
+    }
+  }
+
+  String getWeatherAnimation(String? mainCondition) {
+    if (mainCondition == null) return 'sunny.json';
+
+    switch (mainCondition.toLowerCase()) {
+      case 'clouds':
+      case 'mist':
+      case 'smoke':
+      case 'haze':
+      case 'dust':
+      case 'fog':
+        return 'cloudy.json';
+      case 'rain':
+      case 'drizzle':
+      case 'shower rain':
+        return 'rainy.json';
+      case 'thunderstorm':
+        return 'stormy.json';
+      case 'clear':
+      default:
+        return 'sunny.json';
     }
   }
 
@@ -43,6 +66,11 @@ class _WeatherPageState extends State<WeatherPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(_weatherModel?.cityName ?? "Loading city.."),
+
+            Lottie.asset(
+              'assets/${getWeatherAnimation(_weatherModel?.mainCondition)}',
+            ),
+
             Text('${_weatherModel?.temperature.round()}°C'),
             ElevatedButton(
               onPressed: _fetchWeather,

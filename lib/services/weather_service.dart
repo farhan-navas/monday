@@ -16,10 +16,8 @@ class WeatherService {
     String? countryCode,
   ]) async {
     final response = await http.get(
-      Uri.parse('$BASE_URL?q=$cityName&appid=$apiKey'),
+      Uri.parse('$BASE_URL?q=$cityName&appid=$apiKey&units=metric'),
     );
-
-    print(response.statusCode);
     if (response.statusCode == 200) {
       return WeatherModel.fromJson(jsonDecode(response.body));
     } else {
@@ -41,7 +39,6 @@ class WeatherService {
 
     String? city = placemarks[0].locality;
 
-    print(city);
     return city ?? "";
   }
 }
