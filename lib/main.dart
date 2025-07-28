@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:monday/pages/tasks_page.dart';
 import 'package:uni_links/uni_links.dart';
 import 'pages/weather_page.dart';
 
@@ -10,6 +11,7 @@ void main() {
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -55,10 +57,13 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return CupertinoApp(
       debugShowCheckedModeBanner: true,
       title: 'M.O.N.D.A.Y.',
-      home: WeatherPage(),
+      routes: {
+        '/': (ctx) => const TasksPage(),
+        '/tasks': (ctx) => const WeatherPage(),
+      },
     );
   }
 }
