@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:monday/models/weather_model.dart';
+import 'package:monday/src/features/weather/data/weather_model.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:http/http.dart' as http;

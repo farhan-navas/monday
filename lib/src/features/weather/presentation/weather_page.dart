@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:monday/models/weather_model.dart';
-import 'package:monday/services/weather_service.dart';
+import 'package:monday/src/features/weather/data/weather_model.dart';
+import 'package:monday/src/features/weather/data/weather_service.dart';
 
 class WeatherPage extends StatefulWidget {
   const WeatherPage({super.key});
