@@ -28,35 +28,50 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _handleInitialUri();
-    _sub = uriLinkStream.listen((Uri? uri) {
-      if (uri != null) _processUri(uri);
+    _initDeepLinkHandling();
+  }
+
+  void _initDeepLinkHandling() {
+    // 1) handle when app cold-started by a link
+    getInitialUri()
+        .then((uri) {
+          if (uri != null) _processUri(uri);
+        })
+        .catchError((e) {
+          print('Error getting initial uri: $e');
+        });
+
+    // 2) handle when app already running and receives a link
+    _sub = uriLinkStream.listen(
+      (uri) {
+        if (uri != null) _processUri(uri);
+      },
+      onError: (err) {
+        print('URI Stream error: $err');
+      },
+    );
+  }
+
+  // this must also handle ALL possible types of deep linking based on how we are going to configure siri
+  void _processUri(Uri uri) {
+    print('🔗 Deep link received: $uri');
+    setState(() {
+      switch (uri.host) {
+        case 'weather':
+          _selectedIndex = 0;
+
+        // TODO: pull out city param and pass to weather service
+        // can use, final city = uri.queryParameters['city'];
+        case 'tasks':
+          _selectedIndex = 1;
+        case 'health':
+          _selectedIndex = 2;
+        default:
+          break;
+      }
+      // optionally collapse sidebar
+      _isSideBarExpanded = false;
     });
-  }
-
-  Future<void> _handleInitialUri() async {
-    try {
-      final initialUri = await getInitialLink();
-
-      if (initialUri != null) _processUri(initialUri as Uri);
-    } on FormatException {
-      print("URI Format error, something is wrong oops");
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  void _processUri(Uri uriString) {
-    final uri = Uri.parse(uriString as String);
-    if (uri.host == 'weather' && uri.queryParameters['city'] != null) {
-      final city = uri.queryParameters['city']!;
-      setState(() {
-        _selectedIndex = 1;
-      });
-      print('🔔 Siri wants weather for: $city');
-
-      // TODO: wire into WeatherPage via maybe a provider or setState(?)
-    }
   }
 
   @override
