@@ -107,14 +107,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		C9CBAB732E4196770064FBA0 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		C9CBAB732E4196770064FBA0 /* Exceptions for "OpenStatusReportIntent" folder in "OpenStatusReportIntent" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
 			target = C9CBAB592E4196770064FBA0 /* OpenStatusReportIntent */;
 		};
-		C9CBAB782E4196770064FBA0 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		C9CBAB782E4196770064FBA0 /* Exceptions for "OpenStatusReportIntentUI" folder in "OpenStatusReportIntentUI" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -124,8 +124,30 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		C9CBAB5C2E4196770064FBA0 /* OpenStatusReportIntent */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (C9CBAB732E4196770064FBA0 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = OpenStatusReportIntent; sourceTree = "<group>"; };
-		C9CBAB662E4196770064FBA0 /* OpenStatusReportIntentUI */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (C9CBAB782E4196770064FBA0 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = OpenStatusReportIntentUI; sourceTree = "<group>"; };
+		C9CBAB5C2E4196770064FBA0 /* OpenStatusReportIntent */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C9CBAB732E4196770064FBA0 /* Exceptions for "OpenStatusReportIntent" folder in "OpenStatusReportIntent" target */,
+			);
+			explicitFileTypes = {
+			};
+			explicitFolders = (
+			);
+			path = OpenStatusReportIntent;
+			sourceTree = "<group>";
+		};
+		C9CBAB662E4196770064FBA0 /* OpenStatusReportIntentUI */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C9CBAB782E4196770064FBA0 /* Exceptions for "OpenStatusReportIntentUI" folder in "OpenStatusReportIntentUI" target */,
+			);
+			explicitFileTypes = {
+			};
+			explicitFolders = (
+			);
+			path = OpenStatusReportIntentUI;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -466,13 +488,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

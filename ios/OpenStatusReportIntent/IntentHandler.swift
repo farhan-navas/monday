@@ -22,7 +22,7 @@ class IntentHandler: INExtension {
 
 class OpenStatusReportHandler: NSObject, OpenStatusReportIntentHandling {
     func handle(intent: OpenStatusReportIntent, completion: @escaping (OpenStatusReportIntentResponse) -> Void) {
-        let activity = NSUserActivity(activityType: "com.yourcompany.monday.openStatusReport")
+        let activity = NSUserActivity(activityType: "com.example.monday.openStatusReport")
         activity.title = "Open Status Report"
         
         if let url = URL(string: "monday://tasks") {

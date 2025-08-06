@@ -6,6 +6,7 @@ import 'package:uni_links/uni_links.dart';
 import 'features/tasks/presentation/tasks_page.dart';
 import 'features/weather/presentation/weather_page.dart';
 import 'features/health/presentation/health_page.dart';
+import 'features/settings/presentation/settings_page.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -23,6 +24,7 @@ class _MyAppState extends State<MyApp> {
     const WeatherPage(),
     const TasksPage(),
     const HealthPage(),
+    const SettingsPage(),
   ];
 
   @override
@@ -113,6 +115,10 @@ class _MyAppState extends State<MyApp> {
                       SidebarDestination(
                         icon: Icon(CupertinoIcons.heart),
                         label: Text('Health'),
+                      ),
+                      SidebarDestination(
+                        icon: Icon(CupertinoIcons.settings),
+                        label: Text('Settings'),
                       ),
                     ],
                   ),
