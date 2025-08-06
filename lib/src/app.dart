@@ -20,7 +20,6 @@ class _MyAppState extends State<MyApp> {
   StreamSubscription<Uri?>? _sub;
   int _selectedIndex = 0;
   bool _isSideBarExpanded = false;
-  double kSidebarWidth = 250.0;
 
   final List<Widget> _pages = [
     const WeatherPage(),
@@ -87,27 +86,30 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final sidebarWidth = screenWidth * (_isSideBarExpanded ? 0.7 : 0.2);
+
     return CupertinoApp(
       debugShowCheckedModeBanner: false,
-      title: 'M.O.N.D.A.Y.',
+      title: 'MONDAY',
       home: CupertinoPageScaffold(
         child: Stack(
           children: [
-            // 1) Full-width page always underneath
+            // full-width page always stays underneath
             Center(
               child: CupertinoTabTransitionBuilder(
                 child: _pages.elementAt(_selectedIndex),
               ),
             ),
 
-            // 2) Sidebar overlay
+            // sidebar now overlay
             AnimatedPositioned(
-              duration: Duration(milliseconds: 200),
+              duration: Duration.zero,
               top: 0,
               bottom: 0,
               left: 0,
-              // pick your collapsed/expanded widths
-              width: _isSideBarExpanded ? 250 : 80,
+              width: sidebarWidth,
+              curve: Curves.linear,
               child: CupertinoSidebarCollapsible(
                 isExpanded: _isSideBarExpanded,
                 child: CupertinoSidebar(
@@ -117,7 +119,7 @@ class _MyAppState extends State<MyApp> {
                     _isSideBarExpanded = !_isSideBarExpanded;
                   }),
                   navigationBar: const SidebarNavigationBar(
-                    title: Text('M.O.N.D.A.Y.'),
+                    title: Text('MONDAY'),
                   ),
                   children: const [
                     SidebarDestination(
@@ -145,7 +147,7 @@ class _MyAppState extends State<MyApp> {
               ),
             ),
 
-            // 3) Your toggle button, still on top
+            // toggle button for sidebar
             SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
