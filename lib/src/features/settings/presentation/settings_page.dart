@@ -8,13 +8,13 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
-        middle: Text('HEALTH BAR', style: TextStyle(fontSize: 24)),
+        middle: Text('SETTINGS', style: TextStyle(fontSize: 24)),
       ),
       child: SafeArea(
         child: ListView(
           children: const [
             TaskTile(
-              title: 'WE ARE ON THE HEALTH PAGE',
+              title: 'WE ARE ON THE SETTINGS PAGE',
               completed: false,
               avatarUrl: 'https://randomuser.me/api/portraits/men/32.jpg',
             ),

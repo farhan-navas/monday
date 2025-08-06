@@ -6,6 +6,7 @@ import 'package:uni_links/uni_links.dart';
 import 'features/tasks/presentation/tasks_page.dart';
 import 'features/weather/presentation/weather_page.dart';
 import 'features/health/presentation/health_page.dart';
+import 'features/blocker/presentation/blocker_page.dart';
 import 'features/settings/presentation/settings_page.dart';
 
 class MyApp extends StatefulWidget {
@@ -19,11 +20,13 @@ class _MyAppState extends State<MyApp> {
   StreamSubscription<Uri?>? _sub;
   int _selectedIndex = 0;
   bool _isSideBarExpanded = false;
+  double kSidebarWidth = 250.0;
 
   final List<Widget> _pages = [
     const WeatherPage(),
     const TasksPage(),
     const HealthPage(),
+    const BlockerPage(),
     const SettingsPage(),
   ];
 
@@ -85,55 +88,64 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       title: 'M.O.N.D.A.Y.',
       home: CupertinoPageScaffold(
         child: Stack(
           children: [
-            Row(
-              children: [
-                CupertinoSidebarCollapsible(
-                  isExpanded: _isSideBarExpanded,
-                  child: CupertinoSidebar(
-                    selectedIndex: _selectedIndex,
-                    onDestinationSelected: (value) => setState(() {
-                      _selectedIndex = value;
-                      _isSideBarExpanded = !_isSideBarExpanded;
-                    }),
-                    navigationBar: const SidebarNavigationBar(
-                      title: Text('M.O.N.D.A.Y.'),
-                    ),
-                    children: const [
-                      SidebarDestination(
-                        icon: Icon(CupertinoIcons.cloud),
-                        label: Text('Weather'),
-                      ),
-                      SidebarDestination(
-                        icon: Icon(CupertinoIcons.list_bullet),
-                        label: Text('Tasks'),
-                      ),
-                      SidebarDestination(
-                        icon: Icon(CupertinoIcons.heart),
-                        label: Text('Health'),
-                      ),
-                      SidebarDestination(
-                        icon: Icon(CupertinoIcons.settings),
-                        label: Text('Settings'),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // ─── Page content ───
-                Expanded(
-                  child: Center(
-                    child: CupertinoTabTransitionBuilder(
-                      child: _pages.elementAt(_selectedIndex),
-                    ),
-                  ),
-                ),
-              ],
+            // 1) Full-width page always underneath
+            Center(
+              child: CupertinoTabTransitionBuilder(
+                child: _pages.elementAt(_selectedIndex),
+              ),
             ),
+
+            // 2) Sidebar overlay
+            AnimatedPositioned(
+              duration: Duration(milliseconds: 200),
+              top: 0,
+              bottom: 0,
+              left: 0,
+              // pick your collapsed/expanded widths
+              width: _isSideBarExpanded ? 250 : 80,
+              child: CupertinoSidebarCollapsible(
+                isExpanded: _isSideBarExpanded,
+                child: CupertinoSidebar(
+                  selectedIndex: _selectedIndex,
+                  onDestinationSelected: (value) => setState(() {
+                    _selectedIndex = value;
+                    _isSideBarExpanded = !_isSideBarExpanded;
+                  }),
+                  navigationBar: const SidebarNavigationBar(
+                    title: Text('M.O.N.D.A.Y.'),
+                  ),
+                  children: const [
+                    SidebarDestination(
+                      icon: Icon(CupertinoIcons.cloud),
+                      label: Text('Weather'),
+                    ),
+                    SidebarDestination(
+                      icon: Icon(CupertinoIcons.list_bullet),
+                      label: Text('Tasks'),
+                    ),
+                    SidebarDestination(
+                      icon: Icon(CupertinoIcons.heart),
+                      label: Text('Health'),
+                    ),
+                    SidebarDestination(
+                      icon: Icon(CupertinoIcons.lock),
+                      label: Text('App Blocker'),
+                    ),
+                    SidebarDestination(
+                      icon: Icon(CupertinoIcons.settings),
+                      label: Text('Settings'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            // 3) Your toggle button, still on top
             SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
