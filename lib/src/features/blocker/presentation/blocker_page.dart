@@ -72,17 +72,22 @@ class _BlockerPageState extends State<BlockerPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  buildSection(
-                    'Currently blocking',
-                    _currentlyBlocking,
-                    _deleteMode,
-                    (p) {
+                  BlockerWidget(
+                    title: 'Currently blocking',
+                    profiles: _currentlyBlocking,
+                    deleteMode: _deleteMode,
+                    onProfileTap: (p) {
                       setState(() => p.isSelected = !p.isSelected);
                     },
                   ),
-                  buildSection('Upcoming', _upcoming, _deleteMode, (p) {
-                    setState(() => p.isSelected = !p.isSelected);
-                  }),
+                  BlockerWidget(
+                    title: 'Upcoming',
+                    profiles: _upcoming,
+                    deleteMode: _deleteMode,
+                    onProfileTap: (p) {
+                      setState(() => p.isSelected = !p.isSelected);
+                    },
+                  ),
                   const SizedBox(height: 100),
                 ],
               ),

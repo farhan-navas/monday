@@ -7,11 +7,11 @@ class TaskTile extends StatelessWidget {
   final String avatarUrl;
 
   const TaskTile({
-    Key? key,
+    super.key,
     required this.title,
     this.completed = false,
     required this.avatarUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

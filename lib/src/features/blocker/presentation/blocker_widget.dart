@@ -2,34 +2,45 @@ import 'package:flutter/cupertino.dart';
 import 'package:monday/src/features/blocker/data/blocker_model.dart';
 
 /// Builds a section with a grey title and list of profile cards.
-Widget buildSection(
-  String title,
-  List<BlockerModel> profiles,
-  bool deleteMode,
-  void Function(BlockerModel) onProfileTap,
-) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Padding(
-        padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
-        child: Text(
-          title,
-          style: const TextStyle(
-            fontSize: 16,
-            color: CupertinoColors.inactiveGray,
+class BlockerWidget extends StatelessWidget {
+  final String title;
+  final List<BlockerModel> profiles;
+  final bool deleteMode;
+  final void Function(BlockerModel) onProfileTap;
+
+  const BlockerWidget({
+    super.key,
+    required this.title,
+    this.profiles = const <BlockerModel>[],
+    required this.deleteMode,
+    required this.onProfileTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 16,
+              color: CupertinoColors.inactiveGray,
+            ),
           ),
         ),
-      ),
-      ...profiles.map(
-        (p) => _ProfileCard(
-          profile: p,
-          deleteMode: deleteMode,
-          onTap: () => onProfileTap(p),
+        ...profiles.map(
+          (p) => _ProfileCard(
+            profile: p,
+            deleteMode: deleteMode,
+            onTap: () => onProfileTap(p),
+          ),
         ),
-      ),
-    ],
-  );
+      ],
+    );
+  }
 }
 
 /// The red delete bar at bottom with a single Delete button.
