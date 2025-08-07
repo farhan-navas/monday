@@ -36,9 +36,9 @@ extra pages wherever I want to!
 
 - [x] Task manager, kind of like a todo list (for now just a static list)
 
-  - [ ] Top right plus button to add tasks to the todo list
-  - [ ] Trash button beside plus button, to select and delete selected tasks
-  - [ ] Swipe left/right to bring up delete button to delete the task from list/mark as completed
+  - [x] Top right plus button to add tasks to the todo list
+  - [x] Trash button beside plus button, to select and delete selected tasks
+  - [x] Swipe left/right to bring up delete button to delete the task from list/mark as completed
 
 - [ ] Screentime dashboard, which just shows overall past screentime data and overall time saved
 
@@ -49,7 +49,7 @@ extra pages wherever I want to!
 
 - [ ] Health dashboard
 - [ ] Sleep dashboard
-- [ ] User details dashboard
+- [ ] User details dashboard, basically just settings page
 - [ ] Pricing Page, just UI does not do anything
 
 FUNCTIONALITY
@@ -68,3 +68,6 @@ FUNCTIONALITY
         when i ask for it
 - [ ] Local only 'Memories' storage
 - [ ] Ability to login with Apple/Google/MS account, and provide functionality to be able to export
+
+Also just adding it here in case i forget, but use sharedPreferences to store data in localStorage. Need
+to read more about this though find out where the data is actually stored on your device when you use this.
